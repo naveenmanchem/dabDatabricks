@@ -4,7 +4,6 @@ bundle:
 # Include resource configuration files from the resources directory
 include:
   - resources/*.yml
-
 # Define target deployment environments
 targets:
   dev:
