@@ -24,7 +24,7 @@ jobs:
         run: |
           databricks bundle validate --target ${{ env.BUNDLE_TARGET }}
 
-      # Step 4: Deploy the bundle on pushes (Merges/Commits) to main or dev branches
+      # Step 4: Deploy the bundle on pushes (Merges/Commits) to main branche
       - name: Deploy Asset Bundle
         if: github.event_name == 'push'
         run: |
