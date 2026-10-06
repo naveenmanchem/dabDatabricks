@@ -2,8 +2,17 @@ resources:
   jobs:
     sample_workflow_job:
       name: "[${bundle.target}] Sample Data Pipeline Job"
+      
+      # Define the shared compute configuration for this job
+      compute:
+        - compute_key: serverless_compute
+          spec:
+            # Setting this to true tells Databricks to use Serverless Compute
+            is_serverless: true
+
       tasks:
         - task_key: run_notebook_task
-          existing_cluster_id: 1234-567890-abcde123 # Replace with a valid cluster ID or define a new cluster
+          # Reference the serverless compute defined above
+          compute_key: serverless_compute
           notebook_task:
-            notebook_path: ../src/my_notebook.ipynb # Relative path to your code
+            notebook_path: ../src/mynotebook.ipynb
