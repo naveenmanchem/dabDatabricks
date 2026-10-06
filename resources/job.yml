@@ -1,0 +1,9 @@
+resources:
+  jobs:
+    sample_workflow_job:
+      name: "[${bundle.target}] Sample Data Pipeline Job"
+      tasks:
+        - task_key: run_notebook_task
+          existing_cluster_id: 1234-567890-abcde123 # Replace with a valid cluster ID or define a new cluster
+          notebook_task:
+            notebook_path: ../src/my_notebook.ipynb # Relative path to your code
