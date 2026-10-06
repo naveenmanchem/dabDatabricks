@@ -1,0 +1,24 @@
+    env:
+      DATABRICKS_HOST: ${{ github.ref == 'refs/heads/main' && secrets.PROD_DATABRICKS_HOST || secrets.DEV_DATABRICKS_HOST }}
+      DATABRICKS_TOKEN: ${{ github.ref == 'refs/heads/main' && secrets.PROD_DATABRICKS_TOKEN || secrets.DEV_DATABRICKS_TOKEN }}
+      BUNDLE_TARGET: ${{ github.ref == 'refs/heads/main' && 'prod' || 'dev' }}
+
+    steps:
+      # Step 1: Check out the repository
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      # Step 2: Install Databricks CLI (includes built-in DAB commands)
+      - name: Setup Databricks CLI
+        uses: databricks/setup-cli@v0.9.0
+
+      # Step 3: Run structural and configuration check
+      - name: Validate Asset Bundle
+        run: |
+          databricks bundle validate --target ${{ env.BUNDLE_TARGET }}
+
+      # Step 4: Deploy the bundle on pushes (Merges/Commits) to main or dev branches
+      - name: Deploy Asset Bundle
+        if: github.event_name == 'push'
+        run: |
+          databricks bundle deploy --target ${{ env.BUNDLE_TARGET }}
