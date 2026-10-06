@@ -1,0 +1,14 @@
+bundle:
+  name: my-databricks-project
+
+# Include resource configuration files from the resources directory
+include:
+  - resources/*.yml
+
+# Define target deployment environments
+targets:
+  dev:
+    default: true
+    workspace:
+      host: https://adb-dev.cloud.databricks.com # Replace with your Dev workspace URL
+      root_path: /Shared/.bundle/${bundle.name}/dev
