@@ -1,5 +1,5 @@
 bundle:
-  name: my-databricks-project
+  name: dabDatabricks
 
 # Include resource configuration files from the resources directory
 include:
@@ -10,5 +10,5 @@ targets:
   dev:
     default: true
     workspace:
-      host: https://adb-dev.cloud.databricks.com # Replace with your Dev workspace URL
-      root_path: /Shared/.bundle/${bundle.name}/dev
+      host: https://sandbox-cti-citi-sk-tf-test.cloud.databricks.com
+      root_path: /Repos/.bundle/${bundle.name}/dev
