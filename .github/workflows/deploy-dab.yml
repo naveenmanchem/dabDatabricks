@@ -6,8 +6,8 @@ jobs:
   validate-and-deploy:
     runs-on: ubuntu-latest
     env:
-      DATABRICKS_HOST: ${{ github.ref == 'refs/heads/main' && secrets.DEV_DATABRICKS_HOST }}
-      DATABRICKS_TOKEN: ${{ github.ref == 'refs/heads/main' && secrets.DEV_DATABRICKS_TOKEN }}
+      DATABRICKS_HOST: ${{ github.ref == 'refs/heads/main' && 'secrets.DEV_DATABRICKS_HOST' }}
+      DATABRICKS_TOKEN: ${{ github.ref == 'refs/heads/main' && 'secrets.DEV_DATABRICKS_TOKEN' }}
       BUNDLE_TARGET: ${{ github.ref == 'refs/heads/main' && 'dev' }}
 
     steps:
