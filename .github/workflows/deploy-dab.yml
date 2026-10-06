@@ -17,7 +17,7 @@ jobs:
 
       # Step 2: Install Databricks CLI (includes built-in DAB commands)
       - name: Setup Databricks CLI
-        uses: databricks/setup-cli@v0.9.0
+        uses: databricks/setup-cli@main
 
       # Step 3: Run structural and configuration check
       - name: Validate Asset Bundle
