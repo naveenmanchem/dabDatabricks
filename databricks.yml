@@ -9,5 +9,5 @@ targets:
   dev:
     default: true
     workspace:
-      host: {{ secrets.DEV_DATABRICKS_HOST }}
+      host: {{ github.ref == 'refs/heads/main' && secrets.DEV_DATABRICKS_HOST }}
       root_path: /Repos/.bundle/${bundle.name}/dev
