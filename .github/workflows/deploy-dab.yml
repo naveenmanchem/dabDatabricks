@@ -19,6 +19,10 @@ jobs:
       - name: Setup Databricks CLI
         uses: databricks/setup-cli@main
 
+      - name: Authentication
+        run: |
+          databricks auth login --host https://sandbox-cti-citi-sk-tf-test.cloud.databricks.com
+
       # Step 3: Run structural and configuration check
       - name: Validate Asset Bundle
         run: |
