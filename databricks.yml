@@ -9,6 +9,6 @@ targets:
   dev:
     default: true
     workspace:
-      host: https://sandbox-cti-citi-sk-tf-test.cloud.databricks.com
-      #host: {{ 'secrets.DEV_DATABRICKS_HOST' }}
-      root_path: /Workspace/Users/.bundle/${bundle.name}/dev
+      #host: https://sandbox-cti-citi-sk-tf-test.cloud.databricks.com
+      host: {{ 'secrets.DEV_DATABRICKS_HOST' }}
+      root_path: /home/.bundle/${bundle.name}/dev
