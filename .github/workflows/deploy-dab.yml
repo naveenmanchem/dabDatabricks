@@ -26,7 +26,7 @@ jobs:
       # Step 3: Run structural and configuration check
       - name: Validate Asset Bundle
         run: |
-          databricks bundle validate --target dev
+          databricks bundle validate
 
       # Step 4: Deploy the bundle on pushes (Merges/Commits) to main branche
       - name: Deploy Asset Bundle
