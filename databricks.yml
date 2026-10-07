@@ -10,5 +10,5 @@ targets:
     default: true
     workspace:
       #host: https://sandbox-cti-citi-sk-tf-test.cloud.databricks.com
-      host: {{ github.ref == 'refs/heads/main' && 'secrets.DEV_DATABRICKS_HOST' }}
+      host: {{ 'secrets.DEV_DATABRICKS_HOST' }}
       root_path: /Workspace/Users/.bundle/${bundle.name}/dev
