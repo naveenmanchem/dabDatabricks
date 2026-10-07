@@ -8,7 +8,7 @@ jobs:
     env:
       DATABRICKS_HOST: ${{ github.ref == 'refs/heads/main' && 'secrets.DEV_DATABRICKS_HOST' }}
       DATABRICKS_TOKEN: ${{ github.ref == 'refs/heads/main' && 'secrets.DEV_DATABRICKS_TOKEN' }}
-      BUNDLE_TARGET: ${{ github.ref == 'refs/heads/main' && 'dev' }}
+      DATABRICKS_CLIENT_ID: ${{ github.ref == 'refs/heads/main' && 'secrets.DEV_DATABRICKS_CLIENT_ID' }}
 
     steps:
       # Step 1: Check out the repository
