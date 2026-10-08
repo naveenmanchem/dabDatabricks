@@ -1,13 +1,13 @@
 bundle:
-  name: dabDatabricks
+  name: serverless_job
 
-# Include resource configuration files from the resources directory
 include:
   - resources/*.yml
-# Define target deployment environments
+
+workspace:
+  host: https://sandbox-cti-citi-sk-tf-test.cloud.databricks.com/
+
 targets:
   dev:
     default: true
-    #workspace:
-     # host: https://sandbox-cti-citi-sk-tf-test.cloud.databricks.com
-      #root_path: /Repos/.bundle/${bundle.name}/dev
+    mode: development
