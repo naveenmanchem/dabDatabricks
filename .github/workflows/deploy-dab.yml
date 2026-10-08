@@ -1,7 +1,6 @@
 name: "Databricks CI/CD"
-on:
-  push:
-    branches: [ main ]
+run-name: DAB Deployment POC
+on: workflow_dispatch
 permissions:
   id-token: write
   contents: read
