@@ -8,6 +8,7 @@ permissions:
 jobs:
   validate-and-deploy:
     runs-on: ubuntu-latest
+    environment: dev
     env:
       DATABRICKS_AUTH_TYPE: github-oidc
       DATABRICKS_HOST: https://sandbox-cti-citi-sk-tf-test.cloud.databricks.com/
