@@ -23,19 +23,6 @@ jobs:
       - name: Setup Databricks CLI
         uses: databricks/setup-cli@main
 
-      # Step 3: Create federation policy
-      - name: Setup federation policy on CLI
-        run: |
-          databricks account service-principal-federation-policy create b360c922-5966-487e-a26b-8ec2fb4db3b6 --json '{
-            "oidc_policy": {
-	                "issuer": "https://token.actions.githubusercontent.com",
-	          "audiences": [
-  	          "a92639c7-0cd9-4877-b1f8-291ffe3056a4"
-	          ],
-	          "subject": "repo:naveenmanchem/dabDatabricks:environment:dev"
-           }
-          }'
-
       # Step 3: Run structural and configuration check
       - name: Validate Asset Bundle
         run: |
