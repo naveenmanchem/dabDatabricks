@@ -2,13 +2,17 @@ name: "Databricks CI/CD"
 on:
   push:
     branches: [ main ]
+permissions:
+  id-token: write
+  contents: read
 jobs:
   validate-and-deploy:
     runs-on: ubuntu-latest
     env:
-      DATABRICKS_HOST: ${{ github.ref == 'refs/heads/main' && secrets.DEV_DATABRICKS_HOST || '' }}
-      DATABRICKS_CLIENT_ID: ${{ github.ref == 'refs/heads/main' && secrets.DEV_DATABRICKS_CLIENT_ID || '' }}
-      DATABRICKS_CLIENT_SECRET: ${{ github.ref == 'refs/heads/main' && secrets.DEV_DATABRICKS_TOKEN || '' }}
+      DATABRICKS_AUTH_TYPE: github-oidc
+      DATABRICKS_HOST: ${{ github.ref == 'refs/heads/main' && 'secrets.DEV_DATABRICKS_HOST' }}
+      #DATABRICKS_TOKEN: ${{ github.ref == 'refs/heads/main' && 'secrets.DEV_DATABRICKS_TOKEN' }}
+      DATABRICKS_CLIENT_ID: ${{ github.ref == 'refs/heads/main' && 'secrets.DEV_DATABRICKS_CLIENT_ID' }}
 
     steps:
       # Step 1: Check out the repository
@@ -19,9 +23,18 @@ jobs:
       - name: Setup Databricks CLI
         uses: databricks/setup-cli@main
 
-      #- name: Authentication
-      #  run: |
-      #    databricks auth login --host https://sandbox-cti-citi-sk-tf-test.cloud.databricks.com
+      # Step 3: Create federation policy
+      - name: Setup federation policy on CLI
+        run: |
+          databricks account service-principal-federation-policy create b360c922-5966-487e-a26b-8ec2fb4db3b6 --json '{
+            "oidc_policy": {
+	                "issuer": "https://token.actions.githubusercontent.com",
+	          "audiences": [
+  	          "a92639c7-0cd9-4877-b1f8-291ffe3056a4"
+	          ],
+	          "subject": "repo:naveenmanchem/dabDatabricks:environment:dev"
+           }
+          }'
 
       # Step 3: Run structural and configuration check
       - name: Validate Asset Bundle
